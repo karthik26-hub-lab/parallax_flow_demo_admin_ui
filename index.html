@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parallax Flow • Academy Examination &amp; Evaluation Portal</title>
+  <meta name="description" content="CA Coaching Academy Examination Management, Handwritten Script Evaluation, and Faculty Review Portal">
+  <meta property="og:title" content="Parallax Flow • Academy Examination &amp; Evaluation Portal">
+  <meta property="og:description" content="CA Coaching Academy Examination Management, Handwritten Script Evaluation, and Faculty Review Portal">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="pf-site">
+
+  <div id="app-viewport">
+
+    <!-- ======================================================================
+         TOP NAVIGATION BAR (Full-Width Bar with parallaxflow.in Palette & Theme Toggle)
+         ====================================================================== -->
+    <header class="pf-topbar" id="pf-nav-wrapper" style="display: none;">
+      <div class="pf-topbar-inner">
+        <a href="#dashboard" class="pf-brand-wordmark" id="nav-brand-logo">
+          <span>PARALLAX FLOW</span>
+        </a>
+
+        <nav class="pf-topnav-links" aria-label="Academy Navigation">
+          <button type="button" class="pf-nav-link active" id="nav-link-dash">Overview</button>
+          <button type="button" class="pf-nav-link" id="nav-link-exams">Examinations</button>
+          <button type="button" class="pf-nav-link" id="nav-link-pending">Pending Reviews</button>
+          <button type="button" class="pf-nav-link" id="nav-link-candidates">Candidates</button>
+          <button type="button" class="pf-nav-link" id="nav-link-toppers">Results &amp; Toppers</button>
+        </nav>
+
+        <div class="pf-topnav-action">
+          <button type="button" class="pf-theme-switch" id="btn-theme-toggle" role="switch" aria-checked="false" aria-label="Toggle Light / Dark Theme" title="Toggle Light / Dark Theme">
+            <span class="pf-theme-switch-track">
+              <span class="pf-theme-switch-thumb" id="theme-toggle-icon"></span>
+            </span>
+          </button>
+          <button type="button" class="pf-btn-logout" id="btn-logout">
+            <span>Sign Out</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ======================================================================
+         VIEW 1: MINIMAL COMPACT SIGN IN
+         ====================================================================== -->
+    <section id="view-login" class="view-page active">
+      <div class="pf-login-centered-wrap">
+        <div class="pf-login-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+            <div class="pf-login-brand" style="margin-bottom: 0;">
+              <div class="pf-login-logo font-mono">PF</div>
+              <div>
+                <div class="pf-login-name">PARALLAX FLOW</div>
+                <div class="pf-login-role-meta">Learning &amp; Evaluation Hub</div>
+              </div>
+            </div>
+            <button type="button" class="pf-theme-switch" id="btn-login-theme-toggle" role="switch" aria-checked="false" aria-label="Toggle Light / Dark Theme" title="Toggle Light / Dark Theme">
+              <span class="pf-theme-switch-track">
+                <span class="pf-theme-switch-thumb" id="login-theme-toggle-icon"></span>
+              </span>
+            </button>
+          </div>
+
+          <div class="pf-login-header">
+            <h1 class="pf-login-title">Academy Faculty <em class="pf-serif-italic">Sign In</em></h1>
+            <p class="pf-login-sub">Manage academy mock exams, track student appearances, and review flagged answer scripts.</p>
+          </div>
+
+          <form id="login-form">
+            <div class="pf-form-group">
+              <label class="pf-form-label" for="admin-email">Faculty / Admin Email</label>
+              <input type="email" id="admin-email" class="pf-input" value="admin@parallaxflow.in" required placeholder="admin@parallaxflow.in">
+            </div>
+
+            <div class="pf-form-group">
+              <label class="pf-form-label" for="admin-password">Password</label>
+              <input type="password" id="admin-password" class="pf-input" value="••••••••••••" required placeholder="Enter password">
+            </div>
+
+            <button type="submit" class="pf-btn-primary pf-btn-full" style="margin-top: 8px;">
+              <span>Sign In to Academy Portal &rarr;</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 2: ACADEMY OVERVIEW & EXAMINATIONS LIST (Primary View After Login)
+         ====================================================================== -->
+    <section id="view-dashboard" class="view-page">
+      <div class="pf-content-container">
+
+        <!-- Academy Header -->
+        <div class="pf-dash-hero-row">
+          <div class="pf-dash-hero-title">
+            <div class="pf-kicker-text">CA Coaching Academy · Evaluation Portal</div>
+            <h1>Academy Examinations &amp; <em class="pf-serif-italic">Evaluation Overview</em></h1>
+            <p>Create examinations, upload student answer scripts for two-pass OCR &amp; rubric evaluation, and review flagged scripts.</p>
+          </div>
+          <div class="pf-dash-hero-controls" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <button type="button" class="pf-btn-secondary" id="btn-open-mobile-api-modal" title="Student Mobile App REST API & Result Gate">
+              <span>Mobile App API</span>
+            </button>
+            <button type="button" class="pf-btn-secondary" id="btn-open-create-exam-modal">
+              <span>+ Create Examination</span>
+            </button>
+            <button type="button" class="pf-btn-primary" id="btn-open-upload-modal">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span>Upload Script</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Clickable Academy-Level KPI Cards -->
+        <div class="pf-bento-grid">
+          <div class="pf-bento-card pf-clickable-kpi" id="kpi-card-exams" role="button" tabindex="0">
+            <div class="pf-bento-card-label">Total Exams Posted</div>
+            <div class="pf-bento-card-val font-mono" id="kpi-total-exams">0</div>
+            <div class="pf-bento-card-sub">Click to view all academy exams &rarr;</div>
+          </div>
+
+          <div class="pf-bento-card pf-clickable-kpi" id="kpi-card-students" role="button" tabindex="0">
+            <div class="pf-bento-card-label">Students Appeared</div>
+            <div class="pf-bento-card-val font-mono" id="kpi-total-appeared">0</div>
+            <div class="pf-bento-card-sub">Total answer scripts uploaded across exams</div>
+          </div>
+
+          <div class="pf-bento-card highlight-verified pf-clickable-kpi" id="kpi-card-evaluated" role="button" tabindex="0">
+            <div class="pf-bento-card-label">Exams / Scripts Evaluated</div>
+            <div class="pf-bento-card-val font-mono" id="kpi-total-evaluated">0</div>
+            <div class="pf-bento-card-sub">Provisional grading complete</div>
+          </div>
+
+          <div class="pf-bento-card highlight-exception pf-clickable-kpi" id="kpi-card-pending" role="button" tabindex="0">
+            <div class="pf-bento-card-label">Reviews Pending</div>
+            <div class="pf-bento-card-val font-mono" id="kpi-total-pending">0</div>
+            <div class="pf-bento-card-sub">Click to filter exams with pending reviews &rarr;</div>
+          </div>
+        </div>
+
+        <!-- Academy Examinations List Table -->
+        <div class="pf-card-panel" id="academy-exams-panel">
+          <div class="pf-panel-header">
+            <div class="pf-panel-header-left">
+              <h3>Conducted Examinations List</h3>
+              <span class="pf-meta-inline font-mono" id="exams-list-count">Showing 0 Academy Exams</span>
+            </div>
+
+            <div class="pf-panel-toolbar">
+              <div class="pf-segmented-filter" id="exam-filter-tabs" role="tablist">
+                <button type="button" class="pf-filter-tab active" data-exam-filter="ALL">All Exams</button>
+                <button type="button" class="pf-filter-tab" data-exam-filter="PENDING">Has Pending Reviews</button>
+                <button type="button" class="pf-filter-tab" data-exam-filter="COMPLETED">All Reviews Cleared</button>
+              </div>
+
+              <select id="exam-subject-filter" class="pf-select-control pf-select-sm" aria-label="Filter by Subject">
+                <option value="ALL">All Subjects</option>
+                <option value="Corporate & Other Laws">Paper 4: Corporate &amp; Other Laws</option>
+                <option value="Advanced Auditing">Paper 3: Advanced Auditing</option>
+                <option value="Direct Tax Laws">Paper 4/7: Direct Tax Laws</option>
+                <option value="Financial Reporting">Paper 1: Financial Reporting</option>
+              </select>
+
+              <div class="pf-search-wrapper">
+                <svg class="pf-search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input
+                  type="text"
+                  id="exam-search-input"
+                  class="pf-search-input"
+                  placeholder="Search exam title or code..."
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="pf-table-scroll">
+            <table class="pf-table">
+              <thead>
+                <tr>
+                  <th>Exam Code &amp; Title</th>
+                  <th>Subject / Paper</th>
+                  <th>Date</th>
+                  <th style="text-align: right;">Max Marks</th>
+                  <th style="text-align: right;">Students Appeared</th>
+                  <th style="text-align: right;">Evaluated</th>
+                  <th style="text-align: right;">Pending Review</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="academy-exams-tbody">
+                <!-- Populated by script.js with all 50 academy exams -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 3: EXAM CANDIDATES QUEUE (Students Appeared for Selected Exam)
+         ====================================================================== -->
+    <section id="view-exam-candidates" class="view-page">
+      <div class="pf-content-container">
+
+        <!-- Breadcrumb & Back Bar -->
+        <div class="pf-view-nav-bar">
+          <div class="pf-breadcrumb-row">
+            <button type="button" class="pf-btn-back" id="btn-back-to-exams">
+              &larr; All Academy Examinations
+            </button>
+            <span class="pf-breadcrumb-sep">/</span>
+            <span class="pf-breadcrumb-current font-mono" id="exam-detail-breadcrumb">EXAM-01</span>
+          </div>
+
+          <div class="pf-view-nav-actions">
+            <button type="button" class="pf-btn-secondary pf-btn-sm" id="btn-export-students-csv">
+              <span>Export Exam Marks (CSV)</span>
+            </button>
+            <button type="button" class="pf-btn-secondary pf-btn-sm" id="btn-publish-exam-results">
+              <span>Publish Results to Mobile App</span>
+            </button>
+            <button type="button" class="pf-btn-primary pf-btn-sm" id="btn-exam-upload-script">
+              <span>+ Upload Student Script</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Selected Exam Summary Strip -->
+        <div class="pf-exam-header-card">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <span class="pf-kicker-text" id="exam-detail-subject">Academy Candidate Directory</span>
+              <span class="pf-ai-decision-chip flagged font-mono" id="exam-publish-status-pill" style="font-size: 10.5px;">Held (Unpublished)</span>
+            </div>
+            <h2 id="exam-detail-title" class="pf-exam-detail-heading">Uploaded Candidate Scripts</h2>
+          </div>
+          <div class="pf-exam-stats-row font-mono">
+            <div class="pf-exam-stat-pill">
+              <span class="text-muted text-xs">Appeared</span>
+              <strong id="exam-stat-appeared">0</strong>
+            </div>
+            <div class="pf-exam-stat-pill">
+              <span class="text-muted text-xs">Provisional Ready</span>
+              <strong class="text-success" id="exam-stat-ready">0</strong>
+            </div>
+            <div class="pf-exam-stat-pill">
+              <span class="text-muted text-xs">Pending Review</span>
+              <strong class="text-warning" id="exam-stat-pending">0</strong>
+            </div>
+            <div class="pf-exam-stat-pill">
+              <span class="text-muted text-xs">Max Marks</span>
+              <strong id="exam-stat-max">100.0</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Candidates Table for Selected Exam -->
+        <div class="pf-card-panel">
+          <div class="pf-panel-header">
+            <div class="pf-panel-header-left">
+              <h3 id="candidates-table-heading">Candidates Appeared</h3>
+              <span class="pf-meta-inline font-mono" id="dash-submissions-count">0 Candidates</span>
+            </div>
+
+            <div class="pf-panel-toolbar">
+              <div class="pf-segmented-filter" id="dash-ai-filter-tabs" role="tablist">
+                <button type="button" class="pf-filter-tab active" data-filter="ALL">All Candidates</button>
+                <button type="button" class="pf-filter-tab" data-filter="CERTIFIED">Provisional Ready</button>
+                <button type="button" class="pf-filter-tab" data-filter="FLAGGED">Pending Review (Flagged)</button>
+              </div>
+
+              <div class="pf-search-wrapper">
+                <svg class="pf-search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input
+                  type="text"
+                  id="dash-student-search"
+                  class="pf-search-input"
+                  placeholder="Search student name or roll no..."
+                  autocomplete="off"
+                />
+                <button type="button" id="dash-search-clear" class="pf-search-clear" title="Clear search" style="display: none;">
+                  &times;
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="pf-table-scroll">
+            <table class="pf-table">
+              <thead>
+                <tr>
+                  <th>Student Name &amp; Roll No</th>
+                  <th>Exam</th>
+                  <th>Center</th>
+                  <th style="text-align: right;">Script</th>
+                  <th style="text-align: right;">Provisional Score</th>
+                  <th>Review Status &amp; Flag Reason</th>
+                  <th style="text-align: right;">Secondary Actions</th>
+                </tr>
+              </thead>
+              <tbody id="dash-submissions-tbody">
+                <!-- Populated by script.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 4 (SECONDARY DRILL-DOWN): GRADING & REVIEW WORKBENCH
+         ====================================================================== -->
+    <section id="view-workbench" class="view-page">
+      <div class="pf-wb-container">
+
+        <!-- Breadcrumb & Candidate / Question Bar -->
+        <div class="pf-ribbon-bar">
+          <div class="pf-ribbon-left">
+            <button type="button" class="pf-btn-back pf-btn-sm" id="btn-wb-back-candidates">
+              &larr; Back to Candidates
+            </button>
+            <span class="pf-ribbon-divider" aria-hidden="true"></span>
+            <div class="pf-wb-candidate-context">
+              <span class="pf-ribbon-label">Student:</span>
+              <select id="wb-student-Select" class="pf-select-control pf-select-sm" aria-label="Switch Student">
+                <!-- Populated by script.js -->
+              </select>
+            </div>
+            <span class="pf-ribbon-divider" aria-hidden="true"></span>
+            <div class="pf-ribbon-track" id="ribbon-track">
+              <!-- Q.1 to Q.8 pills -->
+            </div>
+          </div>
+
+          <div class="pf-ribbon-right">
+            <button type="button" class="pf-btn-secondary pf-btn-sm" id="btn-wb-toggle-flag">
+              <span>Flag / Unflag Script</span>
+            </button>
+            <div class="pf-pager-btns">
+              <button type="button" class="pf-btn-pager" id="btn-prev-q">&larr; Prev</button>
+              <span class="font-mono text-xs font-semibold" id="q-pager-label">1 / 8</span>
+              <button type="button" class="pf-btn-pager" id="btn-next-q">Next &rarr;</button>
+            </div>
+            <button type="button" class="pf-btn-primary pf-btn-sm" id="btn-wb-view-report">
+              <span>Student Report &rarr;</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Flagged Exception Resolution Banner -->
+        <div id="wb-ai-flag-container"></div>
+
+        <!-- 2-Column Split Body -->
+        <div class="pf-workbench-split">
+
+          <!-- Left Pane: Question & Transcript -->
+          <div class="pf-wb-reading-pane">
+            <div class="pf-reading-subheader">
+              <div class="pf-segmented-filter" id="wb-reading-mode-tabs" role="tablist">
+                <button type="button" class="pf-mode-btn active" data-mode="ocr">Transcript</button>
+                <button type="button" class="pf-mode-btn" data-mode="twopass">Pass 1 vs. Pass 2 OCR</button>
+                <button type="button" class="pf-mode-btn" data-mode="diff">ICAI Answer Key</button>
+              </div>
+
+              <div class="pf-version-bar-inline">
+                <select id="wb-version-select" class="pf-select-control pf-select-sm" aria-label="Transcript Version">
+                  <option value="v1">Transcript v1</option>
+                </select>
+                <button type="button" class="pf-btn-secondary pf-btn-sm" id="btn-toggle-transcript-editor">
+                  <span>Edit Transcript</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Inline Transcript Editor -->
+            <div id="wb-transcript-editor-box" class="pf-transcript-editor-box" style="display: none;">
+              <div class="pf-editor-header">
+                <strong>Edit Transcript (Saves as v2+; preserves v1)</strong>
+              </div>
+              <textarea id="wb-transcript-textarea" class="pf-textarea font-mono" rows="5"></textarea>
+              <div class="pf-editor-controls-grid">
+                <div>
+                  <label class="pf-form-label" for="wb-transcript-reason-cat">Reason</label>
+                  <select id="wb-transcript-reason-cat" class="pf-select-control pf-select-sm" style="width: 100%;">
+                    <option value="UNCLEAR_TOKEN_DISAMBIGUATION">Resolve UNCLEAR Token</option>
+                    <option value="PASS1_PASS2_NUMERIC_RECONCILIATION">Fix OCR Number Mismatch</option>
+                    <option value="STUDENT_DISPUTE_CORRECTION">Student Dispute Correction</option>
+                    <option value="SEGMENTATION_HEADER_MAPPING">Fix Question Number Header</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="pf-form-label" for="wb-transcript-reason-text">Note (Required)</label>
+                  <input type="text" id="wb-transcript-reason-text" class="pf-input pf-input-sm" placeholder="Brief note for audit log...">
+                </div>
+              </div>
+              <div class="pf-editor-actions">
+                <button type="button" class="pf-btn-secondary pf-btn-sm" id="btn-cancel-transcript-edit">Cancel</button>
+                <button type="button" class="pf-btn-primary pf-btn-sm" id="btn-save-transcript-version">
+                  <span>Save &amp; Re-Grade</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="pf-reading-content">
+              <div class="pf-prompt-box">
+                <div class="pf-prompt-tags-row">
+                  <span class="pf-code-badge font-mono" id="wb-prompt-code">Q.1</span>
+                  <span class="pf-section-meta font-mono" id="wb-prompt-section">Companies Act 2013, §2(6)</span>
+                  <span aria-hidden="true">·</span>
+                  <span class="pf-marks-badge font-mono" id="wb-prompt-marks">4.0 Marks</span>
+                  <span class="pf-own-figure-chip font-mono" id="wb-own-figure-chip" style="display: none;">OWN-FIGURE ENABLED</span>
+                </div>
+                <h4 id="wb-prompt-title" class="pf-prompt-heading">Associate Company &amp; Joint Venture Test</h4>
+                <div id="wb-prompt-text" class="pf-prompt-body"></div>
+              </div>
+
+              <div class="pf-transcript-card" id="wb-ocr-card">
+                <div class="pf-transcript-header">
+                  <strong>Candidate Answer Transcript</strong>
+                  <span class="font-mono text-xs text-muted" id="wb-page-indicator">v1</span>
+                </div>
+                <div id="wb-transcript-body" class="pf-transcript-body"></div>
+              </div>
+
+              <div class="pf-transcript-card" id="wb-twopass-card" style="display: none;">
+                <div class="pf-transcript-header">
+                  <strong>Two-Pass OCR &amp; Arithmetic Check</strong>
+                  <span class="font-mono text-xs text-muted" id="wb-twopass-meta">Pass 1 vs. Pass 2</span>
+                </div>
+                <div id="wb-twopass-body" class="pf-transcript-body"></div>
+              </div>
+
+              <div class="pf-transcript-card" id="wb-diff-card" style="display: none;">
+                <div class="pf-transcript-header">
+                  <strong>Candidate Transcript vs. ICAI Suggested Answer</strong>
+                  <span class="font-mono text-xs text-muted">Model Key</span>
+                </div>
+                <div id="wb-diff-body" class="pf-transcript-body"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Pane: Rubric Steps & Faculty Override -->
+          <div class="pf-wb-grading-pane">
+            <div class="pf-grading-subheader">
+              <div>
+                <h3 id="wb-rubric-title">Q.1 · Rubric Evaluation</h3>
+                <span class="pf-grading-subtext">Step-by-step provisional marks · Click -0.5 / +0.5 to override</span>
+              </div>
+              <div class="pf-qscore-display font-mono" id="wb-qscore-pill">4.0 / 4.0 Marks</div>
+            </div>
+
+            <div class="pf-grading-content">
+              <div id="wb-override-form-box" class="pf-override-form-box" style="display: none;">
+                <div class="pf-override-form-header">
+                  <strong id="wb-override-form-title">Override Step Marks</strong>
+                </div>
+                <input type="hidden" id="wb-override-step-no" value="">
+                <div class="pf-editor-controls-grid">
+                  <div>
+                    <label class="pf-form-label" for="wb-override-new-marks">New Marks</label>
+                    <input type="number" step="0.5" min="0" id="wb-override-new-marks" class="pf-input pf-input-sm font-mono">
+                  </div>
+                  <div>
+                    <label class="pf-form-label" for="wb-override-category">Reason Category</label>
+                    <select id="wb-override-category" class="pf-select-control pf-select-sm" style="width: 100%;">
+                      <option value="ALT_LEGAL_INTERPRETATION">Valid Alternative Legal View</option>
+                      <option value="OWN_FIGURE_CREDIT_ADJUSTMENT">Own-Figure Credit Adjustment</option>
+                      <option value="RUBRIC_STEP_DISCRETION">Faculty Rubric Discretion</option>
+                      <option value="OCR_ARTIFACT_COMPENSATION">Handwriting / OCR Adjustment</option>
+                    </select>
+                  </div>
+                </div>
+                <div style="margin-top: 8px;">
+                  <label class="pf-form-label" for="wb-override-reason-text">Reason Note (Required)</label>
+                  <input type="text" id="wb-override-reason-text" class="pf-input pf-input-sm" placeholder="Enter reason for changing marks...">
+                </div>
+                <div class="pf-editor-actions">
+                  <button type="button" class="pf-btn-secondary pf-btn-sm" id="btn-cancel-override">Cancel</button>
+                  <button type="button" class="pf-btn-primary pf-btn-sm" id="btn-submit-override">Save Override</button>
+                </div>
+              </div>
+
+              <div class="pf-steps-list" id="wb-step-cards-container"></div>
+
+              <details class="pf-audit-log-panel">
+                <summary class="pf-audit-log-header" style="cursor: pointer;">
+                  <strong>Audit &amp; Override History</strong>
+                  <span class="font-mono text-xs text-muted" id="wb-audit-log-count">0 Events</span>
+                </summary>
+                <div id="wb-audit-log-list" class="pf-audit-log-list"></div>
+              </details>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 5 (SECONDARY DRILL-DOWN): STUDENT EVALUATION REPORT
+         ====================================================================== -->
+    <section id="view-report" class="view-page">
+      <div class="pf-content-container">
+
+        <div class="pf-view-nav-bar">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button type="button" class="pf-btn-back" id="btn-report-back-candidates">
+              &larr; Back to Exam Candidates
+            </button>
+            <button type="button" class="pf-btn-secondary pf-btn-sm" id="btn-report-back-wb">
+              <span>Open in Grading Workbench</span>
+            </button>
+          </div>
+
+          <div class="pf-view-nav-actions">
+            <button type="button" class="pf-btn-secondary" id="btn-report-flag-transcript">
+              <span>Edit / Flag Transcript Error</span>
+            </button>
+            <button type="button" class="pf-btn-primary" id="btn-report-print">
+              <span>Print / Save PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="pf-report-sheet">
+          <div class="pf-provisional-status-banner">
+            <div class="pf-prov-banner-top">
+              <span class="pf-prov-badge font-mono">RESULT STATUS: PROVISIONAL — Subject to faculty confirmation</span>
+              <span class="font-mono text-xs" id="rep-flagged-count-line">Flags pending review: 0</span>
+            </div>
+            <div class="pf-prov-banner-sub font-mono" id="rep-advisor-dispute-line">
+              Faculty Advisor: CA R. K. Singhania | Dispute window: 7 days from release
+            </div>
+          </div>
+
+          <div class="pf-report-summary-grid">
+            <div class="pf-rep-meta-box">
+              <div class="pf-rep-row"><span>Candidate Name</span> <strong id="rep-name">&mdash;</strong></div>
+              <div class="pf-rep-row"><span>Roll Number</span> <strong id="rep-roll" class="font-mono">&mdash;</strong></div>
+              <div class="pf-rep-row"><span>Examination</span> <strong id="rep-paper">&mdash;</strong></div>
+              <div class="pf-rep-row"><span>Center</span> <strong id="rep-center">&mdash;</strong></div>
+              <div class="pf-rep-row"><span>Transcript Version</span> <strong class="font-mono" id="rep-transcript-ver-line">v1</strong></div>
+            </div>
+
+            <div class="pf-rep-score-box">
+              <span class="pf-rep-score-label">TOTAL SCORE [PROVISIONAL]</span>
+              <div class="pf-rep-score-huge font-mono" id="rep-score-huge">0.0 <span class="pf-rep-score-denom">/ 0.0</span></div>
+              <div class="pf-rep-score-sub font-mono" id="rep-grade-badge">0.0% [PROVISIONAL]</div>
+            </div>
+          </div>
+
+          <div class="pf-report-section">
+            <div class="pf-report-section-head">
+              <div>
+                <h4>THIS-TEST OBSERVATIONS</h4>
+                <p>Factual recurring misses recorded in this script</p>
+              </div>
+            </div>
+            <div id="rep-observations-box" class="pf-observations-box"></div>
+          </div>
+
+          <div class="pf-report-section">
+            <div class="pf-report-section-head">
+              <div>
+                <h4>QUESTION-BY-QUESTION BREAKDOWN</h4>
+                <p>Step-wise rubric evaluation with [PASS], [PARTIAL], [FAIL], and [OWN-FIGURE PASS] status</p>
+              </div>
+            </div>
+            <div id="rep-questions-audit-trail" class="pf-audit-trail-stack"></div>
+          </div>
+
+          <div class="pf-report-section">
+            <div class="pf-report-section-head">
+              <div>
+                <h4 id="rep-confirmed-transcript-heading">CONFIRMED TRANSCRIPT (v1)</h4>
+                <p>What the OCR read from the handwritten answer script</p>
+              </div>
+              <button type="button" class="pf-btn-secondary pf-btn-sm" id="btn-rep-open-dispute">
+                <span>Flag a transcription error &rarr;</span>
+              </button>
+            </div>
+            <div id="rep-confirmed-transcript-box" class="pf-confirmed-transcript-box font-mono"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ========================================================================
+       CREATE EXAMINATION MODAL
+       ======================================================================== -->
+  <div class="pf-modal-backdrop" id="modal-create-exam" role="dialog" aria-modal="true" aria-labelledby="modal-create-exam-title">
+    <div class="pf-modal-card">
+      <div class="pf-modal-header">
+        <div class="pf-modal-title-group">
+          <strong id="modal-create-exam-title">Create New Academy Examination</strong>
+        </div>
+        <button type="button" class="pf-modal-close" id="btn-close-create-exam-modal" title="Close">&times;</button>
+      </div>
+      <div class="pf-modal-body">
+        <form id="form-create-exam">
+          <div class="pf-editor-controls-grid">
+            <div class="pf-form-group">
+              <label class="pf-form-label" for="create-exam-code">Exam Code</label>
+              <input type="text" id="create-exam-code" class="pf-input pf-input-sm font-mono" placeholder="e.g. EXAM-01" required>
+            </div>
+            <div class="pf-form-group">
+              <label class="pf-form-label" for="create-exam-max-marks">Maximum Marks</label>
+              <input type="number" step="0.5" min="1" id="create-exam-max-marks" class="pf-input pf-input-sm font-mono" value="100" required>
+            </div>
+          </div>
+
+          <div class="pf-form-group">
+            <label class="pf-form-label" for="create-exam-title">Examination Title</label>
+            <input type="text" id="create-exam-title" class="pf-input pf-input-sm" placeholder="e.g. Corporate &amp; Other Laws — Test 1" required>
+          </div>
+
+          <div class="pf-editor-controls-grid">
+            <div class="pf-form-group">
+              <label class="pf-form-label" for="create-exam-subject">Subject / Paper</label>
+              <select id="create-exam-subject" class="pf-select-control pf-select-sm" style="width: 100%;">
+                <option value="Corporate & Other Laws">Paper 4: Corporate &amp; Other Laws</option>
+                <option value="Advanced Auditing">Paper 3: Advanced Auditing</option>
+                <option value="Direct Tax Laws">Paper 7: Direct Tax Laws</option>
+                <option value="Financial Reporting">Paper 1: Financial Reporting</option>
+              </select>
+            </div>
+            <div class="pf-form-group">
+              <label class="pf-form-label" for="create-exam-date">Exam Date</label>
+              <input type="text" id="create-exam-date" class="pf-input pf-input-sm font-mono" placeholder="e.g. 20 May 2026">
+            </div>
+          </div>
+
+          <div class="pf-form-group">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
+              <label class="pf-form-label" for="create-exam-rubric" style="margin-bottom: 0;">Question Paper &amp; Step Rubric (Custom or AI-Generated)</label>
+              <button type="button" class="pf-btn-secondary pf-btn-sm" id="btn-ai-generate-rubric">
+                <span>Generate ICAI Step Rubric with AI</span>
+              </button>
+            </div>
+            <textarea id="create-exam-rubric" class="pf-textarea font-mono" rows="4" placeholder="Enter custom question prompts &amp; step marks, or click 'Generate ICAI Step Rubric with AI' to build a structured ICAI marking scheme..."></textarea>
+            <div id="ai-rubric-preview-box" style="display: none; margin-top: 8px; padding: 10px 12px; border: 1px solid var(--pf-border); border-radius: 8px; background: var(--pf-canvas); font-size: 12px;"></div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px;">
+            <button type="button" class="pf-btn-secondary" id="btn-cancel-create-exam-modal">Cancel</button>
+            <button type="submit" class="pf-btn-primary" id="btn-submit-create-exam">
+              <span>Create Examination</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       STUDENT MOBILE APP API & RESULT RELEASE GATE MODAL
+       ======================================================================== -->
+  <div class="pf-modal-backdrop" id="modal-mobile-api" role="dialog" aria-modal="true" aria-labelledby="modal-mobile-api-title">
+    <div class="pf-modal-card" style="max-width: 680px;">
+      <div class="pf-modal-header">
+        <div class="pf-modal-title-group">
+          <strong id="modal-mobile-api-title">Student Mobile App REST API &amp; Result Release Gate</strong>
+        </div>
+        <button type="button" class="pf-modal-close" id="btn-close-mobile-api-modal" title="Close">&times;</button>
+      </div>
+      <div class="pf-modal-body" style="display: flex; flex-direction: column; gap: 14px;">
+        <p class="text-xs text-muted" style="line-height: 1.55;">
+          Students upload answer scripts from the external <strong>Student Mobile App</strong> using the REST endpoints below. Evaluated scores are automatically held (<code class="font-mono">UNDER_FACULTY_REVIEW</code>) until the Academy Admin confirms flagged scripts and publishes the examination.
+        </p>
+
+        <div style="display: grid; gap: 8px; padding: 12px; border: 1px solid var(--pf-border); border-radius: 8px; background: var(--pf-canvas);" class="font-mono text-xs">
+          <div><strong style="color: var(--pf-accent);">GET</strong>  /api/mobile/exams <span class="text-muted">— List active academy exams for mobile upload</span></div>
+          <div><strong style="color: var(--pf-success);">POST</strong> /api/mobile/submissions <span class="text-muted">— Multipart upload (file, rollNo, candidateName, examCode)</span></div>
+          <div><strong style="color: var(--pf-accent);">GET</strong>  /api/mobile/results/:rollNo <span class="text-muted">— Held until exam is published &amp; script confirmed</span></div>
+          <div><strong style="color: var(--pf-warning);">POST</strong> /api/mobile/disputes <span class="text-muted">— Submit student transcript dispute (creates v2+ &amp; re-flags)</span></div>
+        </div>
+
+        <div style="border-top: 1px solid var(--pf-border); padding-top: 12px;">
+          <strong style="font-size: 13px; display: block; margin-bottom: 8px;">Test Mobile Result Release Gate (<code class="font-mono">GET /api/mobile/results/:rollNo</code>)</strong>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="text" id="mobile-test-roll-input" class="pf-input pf-input-sm font-mono" placeholder="Enter Student Roll No (e.g. 518290)" style="flex: 1;">
+            <button type="button" class="pf-btn-primary pf-btn-sm" id="btn-test-mobile-result">
+              <span>Check Mobile Status</span>
+            </button>
+          </div>
+          <pre id="mobile-test-result-output" class="font-mono" style="margin-top: 10px; padding: 10px 12px; border: 1px solid var(--pf-border); border-radius: 8px; background: var(--pf-canvas); font-size: 11.5px; max-height: 220px; overflow: auto; white-space: pre-wrap;">Enter a Roll Number above to preview what the Student Mobile App receives before and after publishing.</pre>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 4px;">
+          <button type="button" class="pf-btn-secondary" id="btn-done-mobile-api-modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       UPLOAD SCRIPT MODAL
+       ======================================================================== -->
+  <div class="pf-modal-backdrop" id="modal-upload-script" role="dialog" aria-modal="true" aria-labelledby="modal-upload-title">
+    <div class="pf-modal-card">
+      <div class="pf-modal-header">
+        <div class="pf-modal-title-group">
+          <strong id="modal-upload-title">Upload Student Answer Script</strong>
+        </div>
+        <button type="button" class="pf-modal-close" id="btn-close-upload-modal" title="Close">&times;</button>
+      </div>
+      <div class="pf-modal-body">
+        <form id="form-upload-script">
+          <div class="pf-form-group">
+            <label class="pf-form-label" for="upload-exam-select">Target Examination</label>
+            <select id="upload-exam-select" class="pf-select-control pf-select-sm" style="width: 100%;">
+              <!-- Populated by script.js -->
+            </select>
+          </div>
+
+          <div class="pf-editor-controls-grid">
+            <div class="pf-form-group">
+              <label class="pf-form-label" for="upload-candidate-name">Student Name</label>
+              <input type="text" id="upload-candidate-name" class="pf-input pf-input-sm" placeholder="Enter candidate full name" required>
+            </div>
+            <div class="pf-form-group">
+              <label class="pf-form-label" for="upload-roll-no">Roll Number</label>
+              <input type="text" id="upload-roll-no" class="pf-input pf-input-sm font-mono" placeholder="Enter roll number" required>
+            </div>
+          </div>
+
+          <div class="pf-form-group">
+            <label class="pf-form-label" for="upload-region">Regional Center</label>
+            <select id="upload-region" class="pf-select-control pf-select-sm" style="width: 100%;">
+              <option value="WIRC" selected>WIRC · Western Region</option>
+              <option value="SIRC">SIRC · Southern Region</option>
+              <option value="NIRC">NIRC · Northern Region</option>
+            </select>
+          </div>
+
+          <div class="pf-form-group">
+            <label class="pf-form-label" for="upload-file-input">Answer Script File (PDF, Image Scan, or TXT)</label>
+            <input type="file" id="upload-file-input" class="pf-input pf-input-sm" accept=".png,.jpg,.jpeg,.webp,.pdf,.txt,.md">
+          </div>
+
+          <div class="pf-form-group">
+            <label class="pf-form-label" for="upload-transcript-text">Or Paste Answer Transcript Directly (Optional if file attached)</label>
+            <textarea id="upload-transcript-text" class="pf-textarea font-mono" rows="4" placeholder="[Q.1] Paste handwritten transcript or answer text here if not uploading an image/PDF..."></textarea>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px;">
+            <button type="button" class="pf-btn-secondary" id="btn-cancel-upload-modal">Cancel</button>
+            <button type="submit" class="pf-btn-primary" id="btn-submit-upload-script">
+              <span>Upload &amp; Evaluate</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       FLOATING ADMIN COMMAND ASSISTANT BUTTON & SLIDE-OVER DRAWER
+       ======================================================================== -->
+  <button type="button" class="pf-chat-fab" id="btn-chat-fab" style="display: none;" title="Open Academy Assistant">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>Academy Assistant</span>
+  </button>
+
+  <div class="pf-chat-backdrop" id="pf-chat-backdrop"></div>
+
+  <aside class="pf-chat-drawer" id="pf-chat-drawer" aria-label="Academy Assistant">
+    <div class="pf-chat-drawer-header">
+      <div class="pf-chat-header-left">
+        <div>
+          <div class="pf-chat-title">ACADEMY ASSISTANT</div>
+          <div class="pf-chat-sub">Create exams · Publish results · View toppers</div>
+        </div>
+      </div>
+      <div class="pf-chat-header-actions">
+        <select id="chat-model-select" class="pf-select-control pf-select-sm" title="Select Gemini Model">
+          <option value="gemini-3.8-flash" selected>Standard (3.8 Flash)</option>
+          <option value="gemini-3.1-flash-lite">Fast (3.1 Lite)</option>
+          <option value="gemini-4-argon">Deep (4 Argon)</option>
+        </select>
+        <button type="button" class="pf-btn-secondary pf-btn-sm" id="btn-clear-chat" title="Reset Conversation">Clear</button>
+        <button type="button" class="pf-modal-close" id="btn-close-chat-drawer" title="Close Drawer">&times;</button>
+      </div>
+    </div>
+
+    <div class="pf-chat-quick-bar" id="chat-quick-chips">
+      <button type="button" class="pf-chat-chip" data-cmd="Publish results for all ready examinations">Publish Ready Results</button>
+      <button type="button" class="pf-chat-chip" data-cmd="Show the top 5 toppers with scores">Show Top 5 Toppers</button>
+      <button type="button" class="pf-chat-chip" data-cmd="Filter examinations to show only pending reviews">Filter Pending Exams</button>
+      <button type="button" class="pf-chat-chip" data-cmd="Show flagged candidate scripts">Show Flagged Scripts</button>
+    </div>
+
+    <div class="pf-chat-thread" id="chat-messages-thread">
+      <!-- Populated by script.js -->
+    </div>
+
+    <form class="pf-chat-input-bar" id="form-admin-chat">
+      <input
+        type="text"
+        id="chat-input-field"
+        class="pf-input"
+        placeholder="Type a command (e.g. 'Create exam Corporate Laws Test 1', 'Publish results', 'Show toppers')..."
+        autocomplete="off"
+      >
+      <button type="submit" class="pf-btn-primary" id="btn-send-chat">
+        <span>Run</span>
+      </button>
+    </form>
+  </aside>
+
+  <!-- Toast Notification -->
+  <div class="pf-toast" id="pf-toast" role="status" aria-live="polite">
+    <span id="toast-icon" class="pf-toast-icon"></span>
+    <span id="toast-msg">Done.</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

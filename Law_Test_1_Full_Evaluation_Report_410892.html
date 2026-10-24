@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICAI Evaluation Gazette • Aarav Mehta (410892)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 14mm 16mm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #FAFAFA;
+      color: #09090B;
+      line-height: 1.45;
+      font-size: 13px;
+      padding: 30px 20px;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+    .report-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border: 1px solid #09090B;
+      padding: 36px 42px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .top-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #E4E4E7;
+    }
+    .btn-print {
+      background: #09090B;
+      color: #FFFFFF;
+      border: 1px solid #09090B;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn-print:hover {
+      background: #27272A;
+    }
+    .gazette-header {
+      text-align: center;
+      border-bottom: 2px solid #09090B;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    .crest {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #71717A;
+    }
+    .title {
+      font-size: 20px;
+      font-weight: 800;
+      margin: 6px 0 4px;
+      letter-spacing: -0.02em;
+    }
+    .sub {
+      font-size: 11.5px;
+      color: #52525B;
+      font-weight: 500;
+    }
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      border: 1px solid #09090B;
+      margin-bottom: 24px;
+    }
+    .dossier-info {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 18px;
+      font-size: 12px;
+      border-right: 1px solid #09090B;
+    }
+    .dossier-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #71717A;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .dossier-val {
+      font-weight: 700;
+      color: #09090B;
+    }
+    .dossier-score-box {
+      padding: 16px;
+      background: #09090B;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .score-huge {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 4px 0;
+    }
+    .status-badge {
+      background: #FFFFFF;
+      color: #09090B;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 2px;
+    }
+    .section-h {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #09090B;
+      padding-bottom: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-bottom: 24px;
+    }
+    th {
+      background: #09090B;
+      color: #FFFFFF;
+      text-align: left;
+      padding: 7px 10px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #E4E4E7;
+      vertical-align: middle;
+    }
+    tr:nth-child(even) td {
+      background: #FAFAFA;
+    }
+    .q-block {
+      border: 1px solid #09090B;
+      margin-bottom: 18px;
+      page-break-inside: avoid;
+    }
+    .q-header {
+      background: #F4F4F5;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #09090B;
+    }
+    .q-prompt {
+      padding: 10px 12px;
+      font-size: 11.5px;
+      background: #FAFAFA;
+      border-bottom: 1px solid #E4E4E7;
+      color: #27272A;
+    }
+    .steps-table {
+      margin-bottom: 0;
+      font-size: 11.5px;
+    }
+    .steps-table th {
+      background: #E4E4E7;
+      color: #09090B;
+      padding: 4px 8px;
+      font-size: 10px;
+    }
+    .steps-table td {
+      padding: 6px 8px;
+    }
+    .keywords-row {
+      padding: 6px 12px;
+      background: #FFFFFF;
+      font-size: 10.5px;
+      border-top: 1px solid #E4E4E7;
+    }
+    .kw-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 2px;
+      margin-right: 4px;
+    }
+    .kw-present {
+      background: #09090B;
+      color: #FFFFFF;
+    }
+    .kw-missing {
+      border: 1px solid #D4D4D8;
+      color: #71717A;
+      text-decoration: line-through;
+    }
+    .cert-box {
+      border: 1px solid #09090B;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 16px;
+      margin-top: 24px;
+      page-break-inside: avoid;
+    }
+    @media print {
+      body {
+        background: #FFFFFF;
+        padding: 0;
+      }
+      .report-wrap {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .top-actions {
+        display: none !important;
+      }
+      .btn-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="report-wrap">
+    
+    <div class="top-actions">
+      <div>
+        <strong>Official Evaluation Gazette</strong> • ID: ICAI-EVAL-2026-410892
+      </div>
+      <div>
+        <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+      </div>
+    </div>
+
+    <header class="gazette-header">
+      <div class="crest">The Institute of Chartered Accountants of India</div>
+      <h1 class="title">Descriptive Answer Script Evaluation Report</h1>
+      <div class="sub">ICAI Benchmark Examination • Official Step-Marking &amp; Faculty Certification</div>
+    </header>
+
+    <div class="dossier-grid">
+      <div class="dossier-info">
+        <div>
+          <span class="dossier-label">Candidate Name</span>
+          <span class="dossier-val">Aarav Mehta</span>
+        </div>
+        <div>
+          <span class="dossier-label">Roll Number</span>
+          <span class="dossier-val font-mono">410892</span>
+        </div>
+        <div>
+          <span class="dossier-label">Paper</span>
+          <span class="dossier-val">Law Test - 1: Corporate & Other Laws (ICAI Benchmark)</span>
+        </div>
+        <div>
+          <span class="dossier-label">Session</span>
+          <span class="dossier-val">May 2026 Mock Series</span>
+        </div>
+        <div>
+          <span class="dossier-label">OCR Vision Engine</span>
+          <span class="dossier-val font-mono">Gemini 3.5 Flash-Lite</span>
+        </div>
+        <div>
+          <span class="dossier-label">Classification</span>
+          <span class="dossier-val">First Class / Excellent</span>
+        </div>
+      </div>
+      <div class="dossier-score-box">
+        <span style="font-size: 10px; font-weight: 800; text-transform: uppercase;">Final Score</span>
+        <div class="score-huge font-mono">34.5 / 42.0</div>
+        <div class="status-badge font-mono">82.1% • PASS</div>
+      </div>
+    </div>
+
+    <div class="section-h">
+      <span>Executive Question-wise Marks Distribution</span>
+      <span class="font-mono">Max Marks: 42.0</span>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 70px;">Q.No</th>
+          <th>Topic &amp; Statutory Section Reference</th>
+          <th style="width: 90px; text-align: center;">Max</th>
+          <th style="width: 90px; text-align: center;">Awarded</th>
+          <th style="width: 120px; text-align: center;">Performance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-mono" style="font-weight: 800;">Q.1</td>
+          <td>
+            <strong>Associate Company & Joint Venture Test</strong>
+            <div class="font-mono" style="font-size: 10.5px; color: #71717A;">Companies Act, 2013, Section 2(6) and its Explanation</div>
+          </td>
+          <td class="font-mono" style="text-align: center;">4.0</td>
+          <td class="font-mono" style="text-align: center; font-weight: 800;">4.0</td>
+          <td style="text-align: center;">
+            <span style="border: 1px solid #09090B; padding: 1px 6px; font-size: 10.5px; font-weight: 700;">100% Full Credit</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-mono" style="font-weight: 800;">Q.2</td>
+          <td>
+            <strong>Small Company Definition & Subsidiary Exclusion</strong>
+            <div class="font-mono" style="font-size: 10.5px; color: #71717A;">Companies Act, 2013, Section 2(85), read with Companies (Specification of Definitions Details) Rules, 2014, as amended</div>
+          </td>
+          <td class="font-mono" style="text-align: center;">4.0</td>
+          <td class="font-mono" style="text-align: center; font-weight: 800;">3.0</td>
+          <td style="text-align: center;">
+            <span style="border: 1px solid #09090B; padding: 1px 6px; font-size: 10.5px; font-weight: 700;">75% Partial</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-mono" style="font-weight: 800;">Q.3</td>
+          <td>
+            <strong>One Person Company Dual Membership Restriction</strong>
+            <div class="font-mono" style="font-size: 10.5px; color: #71717A;">Companies (Incorporation) Rules, 2014, Rule 3(2) and Rule 3(3)</div>
+          </td>
+          <td class="font-mono" style="text-align: center;">4.0</td>
+          <td class="font-mono" style="text-align: center; font-weight: 800;">3.0</td>
+          <td style="text-align: center;">
+            <span style="border: 1px solid #09090B; padding: 1px 6px; font-size: 10.5px; font-weight: 700;">75% Partial</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-mono" style="font-weight: 800;">Q.4</td>
+          <td>
+            <strong>Reservation of Name of LLP & 3-Month Window</strong>
+            <div class="font-mono" style="font-size: 10.5px; color: #71717A;">Limited Liability Partnership Act, 2008, Sections 15 and 16; Limited Liability Partnership Rules, 2009, Rule 18 and current MCA RUN-LLP instructions</div>
+          </td>
+          <td class="font-mono" style="text-align: center;">8.0</td>
+          <td class="font-mono" style="text-align: center; font-weight: 800;">6.0</td>
+          <td style="text-align: center;">
+            <span style="border: 1px solid #09090B; padding: 1px 6px; font-size: 10.5px; font-weight: 700;">75% Partial</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-mono" style="font-weight: 800;">Q.5</td>
+          <td>
+            <strong>LLP Whistleblowing Protection & Penalty Waiver</strong>
+            <div class="font-mono" style="font-size: 10.5px; color: #71717A;">Limited Liability Partnership Act, 2008, Section 31(1)–(2)</div>
+          </td>
+          <td class="font-mono" style="text-align: center;">6.0</td>
+          <td class="font-mono" style="text-align: center; font-weight: 800;">4.5</td>
+          <td style="text-align: center;">
+            <span style="border: 1px solid #09090B; padding: 1px 6px; font-size: 10.5px; font-weight: 700;">75% Partial</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-mono" style="font-weight: 800;">Q.6</td>
+          <td>
+            <strong>Private Placement Allotment Timeline & 12% Interest</strong>
+            <div class="font-mono" style="font-size: 10.5px; color: #71717A;">Companies Act, 2013, Section 42(6)</div>
+          </td>
+          <td class="font-mono" style="text-align: center;">4.0</td>
+          <td class="font-mono" style="text-align: center; font-weight: 800;">3.0</td>
+          <td style="text-align: center;">
+            <span style="border: 1px solid #09090B; padding: 1px 6px; font-size: 10.5px; font-weight: 700;">75% Partial</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-mono" style="font-weight: 800;">Q.7</td>
+          <td>
+            <strong>Bonus Shares Issue from CRR & Free Reserves</strong>
+            <div class="font-mono" style="font-size: 10.5px; color: #71717A;">Companies Act, 2013, Section 63(1)–(3); Section 52(2)(a) for permitted use of securities premium</div>
+          </td>
+          <td class="font-mono" style="text-align: center;">8.0</td>
+          <td class="font-mono" style="text-align: center; font-weight: 800;">8.0</td>
+          <td style="text-align: center;">
+            <span style="border: 1px solid #09090B; padding: 1px 6px; font-size: 10.5px; font-weight: 700;">100% Full Credit</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="font-mono" style="font-weight: 800;">Q.8</td>
+          <td>
+            <strong>Share Application Money Deemed Deposit Under Rules</strong>
+            <div class="font-mono" style="font-size: 10.5px; color: #71717A;">Companies (Acceptance of Deposits) Rules, 2014, Rule 2(1)(c)(vii), Explanation; Companies Act, 2013, Section 42(6) where the offer is by private placement</div>
+          </td>
+          <td class="font-mono" style="text-align: center;">4.0</td>
+          <td class="font-mono" style="text-align: center; font-weight: 800;">3.0</td>
+          <td style="text-align: center;">
+            <span style="border: 1px solid #09090B; padding: 1px 6px; font-size: 10.5px; font-weight: 700;">75% Partial</span>
+          </td>
+        </tr>
+        <tr style="background: #F4F4F5; font-weight: 800;">
+          <td colspan="2">TOTAL AGGREGATE EVALUATION SCORE</td>
+          <td class="font-mono" style="text-align: center;">42.0</td>
+          <td class="font-mono" style="text-align: center; font-size: 14px;">34.5</td>
+          <td style="text-align: center; font-weight: 800;">82.1% (PASS)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-h">
+      <span>Detailed Question-by-Question Audit Trail</span>
+      <span class="font-mono">8 Questions Verified</span>
+    </div>
+    <div class="q-block">
+      <div class="q-header">
+        <div>
+          <strong class="font-mono">Q.1</strong> — <strong>Associate Company & Joint Venture Test</strong>
+          <span class="font-mono" style="font-size: 10px; margin-left: 6px; border: 1px solid #CBD5E1; padding: 0 4px;">LAW-COMP-ASSOC-001</span>
+        </div>
+        <div class="font-mono" style="font-weight: 800;">4.0 / 4.0 Marks</div>
+      </div>
+      <div class="q-prompt">
+        <strong>Question:</strong> Alpha Ltd. holds 22% of the voting power in another company in a fiduciary capacity. It also holds a 35% interest in a joint venture agreement and participates in the decision-making process of the joint venture. Examine whether the company qualifies as an associate company under the provisions of the Companies Act, 2013.
+      </div>
+      <table class="steps-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">Step</th>
+            <th>Rubric Evaluation Feedback</th>
+            <th style="width: 60px; text-align: center;">Max</th>
+            <th style="width: 60px; text-align: center;">Awarded</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S1</td>
+            <td>
+              <strong>Identify Section 2(6) and definition of associate company</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Criterion satisfied. Demonstrated understanding of Identify Section 2(6) and definition of associate company.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.00</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S2</td>
+            <td>
+              <strong>Explain significant influence test</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Criterion satisfied. Demonstrated understanding of Explain significant influence test.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.00</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S3</td>
+            <td>
+              <strong>Apply fiduciary-capacity and joint-venture facts</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Criterion satisfied. Demonstrated understanding of Apply fiduciary-capacity and joint-venture facts.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.00</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S4</td>
+            <td>
+              <strong>Give a reasoned conclusion</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Criterion satisfied. Demonstrated understanding of Give a reasoned conclusion.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.00</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="keywords-row">
+        <strong style="text-transform: uppercase; font-size: 10px; margin-right: 6px;">Keywords:</strong>
+<span class="kw-tag kw-present">✓ Section 2(6)</span> <span class="kw-tag kw-present">✓ significant influence</span> <span class="kw-tag kw-present">✓ joint venture company</span> <span class="kw-tag kw-present">✓ fiduciary capacity</span> <span class="kw-tag kw-present">✓ not a subsidiary</span> <span class="kw-tag kw-missing">✕ 20% of total voting power</span> <span class="kw-tag kw-missing">✕ business decisions under an agreement</span>       </div>
+    </div>
+    <div class="q-block">
+      <div class="q-header">
+        <div>
+          <strong class="font-mono">Q.2</strong> — <strong>Small Company Definition & Subsidiary Exclusion</strong>
+          <span class="font-mono" style="font-size: 10px; margin-left: 6px; border: 1px solid #CBD5E1; padding: 0 4px;">LAW-COMP-SMALL-002</span>
+        </div>
+        <div class="font-mono" style="font-weight: 800;">3.0 / 4.0 Marks</div>
+      </div>
+      <div class="q-prompt">
+        <strong>Question:</strong> Zest Services Private Limited is a subsidiary company. Its paid-up share capital is ₹8 crore and its turnover, as per the profit and loss account for the immediately preceding financial year, is ₹90 crore. Examine whether Zest Services Private Limited qualifies as a small company under the Companies Act, 2013.
+      </div>
+      <table class="steps-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">Step</th>
+            <th>Rubric Evaluation Feedback</th>
+            <th style="width: 60px; text-align: center;">Max</th>
+            <th style="width: 60px; text-align: center;">Awarded</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S1</td>
+            <td>
+              <strong>State the statutory definition and applicable limits framework</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S2</td>
+            <td>
+              <strong>Identify the express exclusion</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S3</td>
+            <td>
+              <strong>Apply facts and, if relevant, date of limits</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S4</td>
+            <td>
+              <strong>Conclude</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="keywords-row">
+        <strong style="text-transform: uppercase; font-size: 10px; margin-right: 6px;">Keywords:</strong>
+<span class="kw-tag kw-present">✓ other than a public company</span> <span class="kw-tag kw-missing">✕ Section 2(85)</span> <span class="kw-tag kw-missing">✕ prescribed paid-up capital and turnover limits</span> <span class="kw-tag kw-missing">✕ subsidiary company excluded</span> <span class="kw-tag kw-missing">✕ proviso</span>       </div>
+    </div>
+    <div class="q-block">
+      <div class="q-header">
+        <div>
+          <strong class="font-mono">Q.3</strong> — <strong>One Person Company Dual Membership Restriction</strong>
+          <span class="font-mono" style="font-size: 10px; margin-left: 6px; border: 1px solid #CBD5E1; padding: 0 4px;">LAW-COMP-OPC-003</span>
+        </div>
+        <div class="font-mono" style="font-weight: 800;">3.0 / 4.0 Marks</div>
+      </div>
+      <div class="q-prompt">
+        <strong>Question:</strong> Aman is already a member of one One Person Company (OPC). On the death of another OPC member on 1 October 2023, Aman becomes a member of that OPC as well. Examine whether Aman can continue as a member of both OPCs and state the time limit, if any, within which he must comply with the applicable provisions of the Companies Act, 2013.
+      </div>
+      <table class="steps-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">Step</th>
+            <th>Rubric Evaluation Feedback</th>
+            <th style="width: 60px; text-align: center;">Max</th>
+            <th style="width: 60px; text-align: center;">Awarded</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S1</td>
+            <td>
+              <strong>State the one-OPC membership restriction</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S2</td>
+            <td>
+              <strong>Identify the nominee exception</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S3</td>
+            <td>
+              <strong>State the compliance period and required action</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S4</td>
+            <td>
+              <strong>Apply to the date and conclude</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="keywords-row">
+        <strong style="text-transform: uppercase; font-size: 10px; margin-right: 6px;">Keywords:</strong>
+<span class="kw-tag kw-present">✓ natural person</span> <span class="kw-tag kw-present">✓ not a member of more than one OPC</span> <span class="kw-tag kw-present">✓ nominee</span> <span class="kw-tag kw-present">✓ 180 days</span> <span class="kw-tag kw-missing">✕ Rule 3(2)</span> <span class="kw-tag kw-missing">✕ Rule 3(3)</span> <span class="kw-tag kw-missing">✕ choose one OPC</span>       </div>
+    </div>
+    <div class="q-block">
+      <div class="q-header">
+        <div>
+          <strong class="font-mono">Q.4</strong> — <strong>Reservation of Name of LLP & 3-Month Window</strong>
+          <span class="font-mono" style="font-size: 10px; margin-left: 6px; border: 1px solid #CBD5E1; padding: 0 4px;">LAW-LLP-NAME-004</span>
+        </div>
+        <div class="font-mono" style="font-weight: 800;">6.0 / 8.0 Marks</div>
+      </div>
+      <div class="q-prompt">
+        <strong>Question:</strong> Explain the provisions relating to the reservation of the name of a Limited Liability Partnership (LLP) under Section 16 of the Limited Liability Partnership Act, 2008, with reference to: (i) the circumstances in which an application for reservation of a name may be made; (ii) the form and fee requirements; (iii) the period for which the name may be reserved; and (iv) restrictions relating to undesirable or identical names.
+      </div>
+      <table class="steps-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">Step</th>
+            <th>Rubric Evaluation Feedback</th>
+            <th style="width: 60px; text-align: center;">Max</th>
+            <th style="width: 60px; text-align: center;">Awarded</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S1</td>
+            <td>
+              <strong>Circumstances for application</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">2.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.50</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S2</td>
+            <td>
+              <strong>Form / process and fee</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">2.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.50</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S3</td>
+            <td>
+              <strong>Reservation period</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">2.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.50</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S4</td>
+            <td>
+              <strong>Restrictions on names</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">2.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.50</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="keywords-row">
+        <strong style="text-transform: uppercase; font-size: 10px; margin-right: 6px;">Keywords:</strong>
+<span class="kw-tag kw-present">✓ Section 16</span> <span class="kw-tag kw-present">✓ proposed LLP</span> <span class="kw-tag kw-present">✓ change of name of existing LLP</span> <span class="kw-tag kw-present">✓ prescribed fee</span> <span class="kw-tag kw-present">✓ three months</span> <span class="kw-tag kw-present">✓ undesirable</span> <span class="kw-tag kw-present">✓ registered trade mark</span> <span class="kw-tag kw-missing">✕ RUN-LLP</span> <span class="kw-tag kw-missing">✕ ₹200</span> <span class="kw-tag kw-missing">✕ Section 15(2)</span> <span class="kw-tag kw-missing">✕ identical or too nearly resembles</span>       </div>
+    </div>
+    <div class="q-block">
+      <div class="q-header">
+        <div>
+          <strong class="font-mono">Q.5</strong> — <strong>LLP Whistleblowing Protection & Penalty Waiver</strong>
+          <span class="font-mono" style="font-size: 10px; margin-left: 6px; border: 1px solid #CBD5E1; padding: 0 4px;">LAW-LLP-WHISTLE-005</span>
+        </div>
+        <div class="font-mono" style="font-weight: 800;">4.5 / 6.0 Marks</div>
+      </div>
+      <div class="q-prompt">
+        <strong>Question:</strong> Mr. Aman, a partner of an LLP, has provided useful information during an investigation. A penalty of ₹1,25,000 has been imposed on him. He is also an employee of the LLP. Answer with reference to Section 31 of the Limited Liability Partnership Act, 2008: (i) Can the Tribunal waive or reduce the penalty imposed on Mr. Aman? (ii) Can the LLP discharge, terminate or otherwise penalise him in his capacity as an employee for providing such information?
+      </div>
+      <table class="steps-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">Step</th>
+            <th>Rubric Evaluation Feedback</th>
+            <th style="width: 60px; text-align: center;">Max</th>
+            <th style="width: 60px; text-align: center;">Awarded</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S1</td>
+            <td>
+              <strong>State power to waive or reduce penalty</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S2</td>
+            <td>
+              <strong>Apply useful-information ground and discretion</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">2.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.50</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S3</td>
+            <td>
+              <strong>State employment protection</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S4</td>
+            <td>
+              <strong>Apply to facts and conclude</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">2.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.50</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="keywords-row">
+        <strong style="text-transform: uppercase; font-size: 10px; margin-right: 6px;">Keywords:</strong>
+<span class="kw-tag kw-present">✓ Court or Tribunal</span> <span class="kw-tag kw-present">✓ may reduce or waive</span> <span class="kw-tag kw-present">✓ useful information during investigation</span> <span class="kw-tag kw-present">✓ discharged</span> <span class="kw-tag kw-present">✓ demoted</span> <span class="kw-tag kw-present">✓ suspended</span> <span class="kw-tag kw-missing">✕ Section 31(1)</span> <span class="kw-tag kw-missing">✕ discretionary</span> <span class="kw-tag kw-missing">✕ Section 31(2)</span> <span class="kw-tag kw-missing">✕ threatened</span> <span class="kw-tag kw-missing">✕ harassed</span> <span class="kw-tag kw-missing">✕ discriminated against</span>       </div>
+    </div>
+    <div class="q-block">
+      <div class="q-header">
+        <div>
+          <strong class="font-mono">Q.6</strong> — <strong>Private Placement Allotment Timeline & 12% Interest</strong>
+          <span class="font-mono" style="font-size: 10px; margin-left: 6px; border: 1px solid #CBD5E1; padding: 0 4px;">LAW-COMP-PRIVATE-006</span>
+        </div>
+        <div class="font-mono" style="font-weight: 800;">3.0 / 4.0 Marks</div>
+      </div>
+      <div class="q-prompt">
+        <strong>Question:</strong> A company received application money from its members on 20 March 2023 for the issue of securities through private placement. However, the company failed to allot the securities by 30 June 2023. Examine the validity of the members' objection regarding non-allotment of securities and determine whether they are entitled to claim interest on the application money. Support your answer with reference to Section 42 of the Companies Act, 2013.
+      </div>
+      <table class="steps-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">Step</th>
+            <th>Rubric Evaluation Feedback</th>
+            <th style="width: 60px; text-align: center;">Max</th>
+            <th style="width: 60px; text-align: center;">Awarded</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S1</td>
+            <td>
+              <strong>State 60-day allotment requirement</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S2</td>
+            <td>
+              <strong>State 15-day refund requirement</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S3</td>
+            <td>
+              <strong>State interest rate and commencement</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S4</td>
+            <td>
+              <strong>Apply dates and conclude</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="keywords-row">
+        <strong style="text-transform: uppercase; font-size: 10px; margin-right: 6px;">Keywords:</strong>
+<span class="kw-tag kw-present">✓ private placement</span> <span class="kw-tag kw-present">✓ within 60 days</span> <span class="kw-tag kw-present">✓ repay within 15 days</span> <span class="kw-tag kw-present">✓ 12% per annum</span> <span class="kw-tag kw-present">✓ valid objection</span> <span class="kw-tag kw-missing">✕ Section 42(6)</span> <span class="kw-tag kw-missing">✕ expiry of sixtieth day</span>       </div>
+    </div>
+    <div class="q-block">
+      <div class="q-header">
+        <div>
+          <strong class="font-mono">Q.7</strong> — <strong>Bonus Shares Issue from CRR & Free Reserves</strong>
+          <span class="font-mono" style="font-size: 10px; margin-left: 6px; border: 1px solid #CBD5E1; padding: 0 4px;">LAW-COMP-BONUS-007</span>
+        </div>
+        <div class="font-mono" style="font-weight: 800;">8.0 / 8.0 Marks</div>
+      </div>
+      <div class="q-prompt">
+        <strong>Question:</strong> A company has the following balances: Capital Redemption Reserve (CRR) ₹1,50,000; Securities Premium ₹90,000; Surplus in Statement of Profit and Loss ₹1,20,000; total ₹3,60,000. The company proposes to issue bonus shares in the ratio of 1:3. The face value of each share is ₹10 and there are 90,000 existing shares. (a) Identify the sources from which the company may issue bonus shares under Section 63 of the Companies Act, 2013. (b) Calculate the number and amount of bonus shares to be issued. (c) Can the company issue bonus shares before making the final call on partly paid-up shares? Explain.
+      </div>
+      <table class="steps-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">Step</th>
+            <th>Rubric Evaluation Feedback</th>
+            <th style="width: 60px; text-align: center;">Max</th>
+            <th style="width: 60px; text-align: center;">Awarded</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S1</td>
+            <td>
+              <strong>Identify permitted sources and excluded revaluation reserve</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Criterion satisfied. Demonstrated understanding of Identify permitted sources and excluded revaluation reserve.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">2.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">2.00</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S2</td>
+            <td>
+              <strong>Interpret the bonus ratio and calculate quantity</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Criterion satisfied. Demonstrated understanding of Interpret the bonus ratio and calculate quantity.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.00</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S3</td>
+            <td>
+              <strong>Calculate amount and assess sufficiency</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Criterion satisfied. Demonstrated understanding of Calculate amount and assess sufficiency.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">2.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">2.00</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S4</td>
+            <td>
+              <strong>State partly paid-up share condition</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Criterion satisfied. Demonstrated understanding of State partly paid-up share condition.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">2.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">2.00</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S5</td>
+            <td>
+              <strong>Give clear conclusion and relevant provision</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Criterion satisfied. Demonstrated understanding of Give clear conclusion and relevant provision.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">1.00</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="keywords-row">
+        <strong style="text-transform: uppercase; font-size: 10px; margin-right: 6px;">Keywords:</strong>
+<span class="kw-tag kw-present">✓ free reserves</span> <span class="kw-tag kw-present">✓ capital redemption reserve</span> <span class="kw-tag kw-present">✓ not revaluation reserves</span> <span class="kw-tag kw-present">✓ 1:3</span> <span class="kw-tag kw-present">✓ 30,000 shares</span> <span class="kw-tag kw-present">✓ ₹3,00,000</span> <span class="kw-tag kw-present">✓ partly paid-up shares made fully paid-up</span> <span class="kw-tag kw-missing">✕ Section 63(1)</span> <span class="kw-tag kw-missing">✕ securities premium account</span> <span class="kw-tag kw-missing">✕ Section 63(2)(e)</span>       </div>
+    </div>
+    <div class="q-block">
+      <div class="q-header">
+        <div>
+          <strong class="font-mono">Q.8</strong> — <strong>Share Application Money Deemed Deposit Under Rules</strong>
+          <span class="font-mono" style="font-size: 10px; margin-left: 6px; border: 1px solid #CBD5E1; padding: 0 4px;">LAW-COMP-DEPOSIT-008</span>
+        </div>
+        <div class="font-mono" style="font-weight: 800;">3.0 / 4.0 Marks</div>
+      </div>
+      <div class="q-prompt">
+        <strong>Question:</strong> A company received ₹3,00,000 as application money towards the subscription of securities. The company failed to allot the securities within 60 days from the date of receipt of the application money and also failed to refund the amount within the prescribed additional 15 days. Examine whether the amount received will be treated as a deposit under the Companies Act, 2013.
+      </div>
+      <table class="steps-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">Step</th>
+            <th>Rubric Evaluation Feedback</th>
+            <th style="width: 60px; text-align: center;">Max</th>
+            <th style="width: 60px; text-align: center;">Awarded</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S1</td>
+            <td>
+              <strong>Identify applicable Deposits Rule</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S2</td>
+            <td>
+              <strong>State 60-day allotment condition</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S3</td>
+            <td>
+              <strong>State additional 15-day refund condition and consequence</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+          <tr>
+            <td class="font-mono" style="font-weight: 800;">S4</td>
+            <td>
+              <strong>Apply to facts and conclude</strong>
+              <div style="color: #52525B; font-size: 11px; margin-top: 2px;">Review this criterion and compare your answer with the model answer. Credit should be based on the legal/technical point expressed, not only exact wording.</div>
+              
+            </td>
+            <td class="font-mono" style="text-align: center;">1.0</td>
+            <td class="font-mono" style="text-align: center; font-weight: 800;">0.75</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="keywords-row">
+        <strong style="text-transform: uppercase; font-size: 10px; margin-right: 6px;">Keywords:</strong>
+<span class="kw-tag kw-present">✓ application money</span> <span class="kw-tag kw-present">✓ not allotted within 60 days</span> <span class="kw-tag kw-present">✓ not refunded within 15 days</span> <span class="kw-tag kw-missing">✕ Rule 2(1)(c)(vii)</span> <span class="kw-tag kw-missing">✕ deemed to be a deposit</span> <span class="kw-tag kw-missing">✕ Section 42(6)</span> <span class="kw-tag kw-missing">✕ 12% per annum</span>       </div>
+    </div>
+    <div class="cert-box">
+      <div>
+        <h4 style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">Examiner Official Certification &amp; Sign-Off</h4>
+        <p style="font-size: 11.5px; color: #52525B; line-height: 1.5;">
+          Certified that this descriptive answer booklet has been evaluated against ICAI official model answer keys. Vision OCR extractions, step-wise scores, and faculty overrides have been completely verified and signed off.
+        </p>
+      </div>
+      <div style="text-align: right; border-left: 1px solid #E4E4E7; padding-left: 16px;">
+        <div style="font-weight: 800; font-size: 12.5px;">CA. R. K. Agrawal, FCA</div>
+        <div style="font-size: 11px; color: #52525B;">Chief Examiner • Faculty of Law</div>
+        <div class="font-mono" style="font-size: 10px; color: #71717A; margin-top: 4px;">Stamp: ICAI-EVAL-VAL-2026-9921</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

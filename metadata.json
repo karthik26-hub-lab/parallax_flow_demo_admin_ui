@@ -1,0 +1,6 @@
+{
+  "name": "Parallax Flow • CA Descriptive Answer AI Evaluator",
+  "description": "Autonomous CA Descriptive Answer AI Evaluator, OCR Handwriting Engine, and ICAI Statutory Rubric Grading Portal",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
